@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cardsListFragment">
+    <fragment
+        android:id="@+id/cardFragment"
+        android:name="ru.nikanorovsa.bankapp.ui.fragments.CardFragment"
+        android:label="CardFragment" >
+        <argument
+            android:name="card"
+            app:argType="ru.nikanorovsa.bankapp.data.Card" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardsListFragment"
+        android:name="ru.nikanorovsa.bankapp.ui.fragments.CardsListFragment"
+        android:label="fragment_cards_list"
+        tools:layout="@layout/fragment_cards_list" >
+        <action
+            android:id="@+id/action_cardsListFragment_to_cardFragment"
+            app:destination="@id/cardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+</navigation>

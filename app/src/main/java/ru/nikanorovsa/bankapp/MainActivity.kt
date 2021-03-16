@@ -2,15 +2,13 @@ package ru.nikanorovsa.bankapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
+import ru.nikanorovsa.bankapp.ui.fragments.CardsListFragment
 
-// Стартовый экран содержащий в себе   Fragment с основной логикой
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val userFragment = CardsListFragment.newInstance()
-        val manager = supportFragmentManager
-        manager.beginTransaction().add(R.id.fragment_conainer, userFragment).commit()
-
     }
 }

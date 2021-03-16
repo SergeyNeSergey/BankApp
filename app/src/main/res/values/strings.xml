@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">BankApp</string>
     <string name="update">Update database</string>
+
+    <!-- Strings related to CardsListFragment -->
+    <string name="cards_list_fragment_shadow_number_card">XXXX XXXX XXXX %1$s</string>
+
+    <!-- Strings related to CardFragment -->
+    <string name="card_fragment_debit_card">Дебетовая</string>
+    <string name="card_fragment_credit_card">Кредитовая</string>
+    <string name="card_fragment_number_of_card">%1$s %2$s %3$s %4$s</string>
 </resources>
