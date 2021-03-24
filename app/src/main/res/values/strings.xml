@@ -9,4 +9,8 @@
     <string name="card_fragment_debit_card">Дебетовая</string>
     <string name="card_fragment_credit_card">Кредитовая</string>
     <string name="card_fragment_number_of_card">%1$s %2$s %3$s %4$s</string>
+
+    <!-- Strings related to Retrofit -->
+    <string name="retrofit_url">https://swiftlist.ru/test/</string>
+    <string name="retrofit_gson_date_format">yyyy-MM-dd\'T\'HH:mm:ss</string>
 </resources>
