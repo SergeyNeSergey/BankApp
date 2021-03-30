@@ -43,6 +43,10 @@ class CardsListFragment : Fragment(R.layout.fragment_cards_list) {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
+            cardsListFragmentSwipeRefreshLayout.setOnRefreshListener {
+                viewModel.initRateList()
+                cardsListFragmentSwipeRefreshLayout.isRefreshing = false
+            }
         }
         viewModel.status.observeOn(AndroidSchedulers.mainThread()).subscribe {
             if (it == Status.LOADING) {
