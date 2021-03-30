@@ -21,13 +21,11 @@ import ru.nikanorovsa.bankapp.R
 import ru.nikanorovsa.bankapp.data.Card
 import ru.nikanorovsa.bankapp.databinding.FragmentCardsListBinding
 import ru.nikanorovsa.bankapp.ui.adapters.CardsAdapter
-import ru.nikanorovsa.bankapp.ui.adapters.RecyclerOnItemClickListener
 import ru.nikanorovsa.bankapp.viewmodels.CardListFragmentViewModel
 import ru.nikanorovsa.bankapp.viewmodels.Status
-import java.util.*
 
 @AndroidEntryPoint
-class CardsListFragment : Fragment(R.layout.fragment_cards_list), RecyclerOnItemClickListener {
+class CardsListFragment : Fragment(R.layout.fragment_cards_list) {
 
     private val viewModel : CardListFragmentViewModel by viewModels()
 
@@ -36,7 +34,10 @@ class CardsListFragment : Fragment(R.layout.fragment_cards_list), RecyclerOnItem
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         val binding = FragmentCardsListBinding.bind(view)
-        val cardsAdapter = CardsAdapter( this)
+        val cardsAdapter = CardsAdapter {
+            val action = CardsListFragmentDirections.actionCardsListFragmentToCardFragment(it)
+            findNavController().navigate(action)
+        }
         binding.apply {
             cardsListFragmentRecycler.apply {
                 adapter = cardsAdapter
@@ -91,11 +92,6 @@ class CardsListFragment : Fragment(R.layout.fragment_cards_list), RecyclerOnItem
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onItemClick(card: Card) {
-        val action = CardsListFragmentDirections.actionCardsListFragmentToCardFragment(card)
-        findNavController().navigate(action)
     }
 }
 

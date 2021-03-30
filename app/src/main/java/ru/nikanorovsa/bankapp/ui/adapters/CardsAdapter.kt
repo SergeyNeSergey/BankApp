@@ -13,7 +13,7 @@ import ru.nikanorovsa.bankapp.data.Card
 import ru.nikanorovsa.bankapp.databinding.ViewCardBinding
 
 class CardsAdapter(
-    var clickListener: RecyclerOnItemClickListener
+    private val clickListener: (card: Card) -> Unit
 ) :
     ListAdapter<Card, CardsAdapter.CardsViewHolder>(DiffCallback()) {
 
@@ -33,7 +33,7 @@ class CardsAdapter(
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {
         val card: Card = getItem(position)
         holder.bind(card)
-        holder.binding.root.setOnClickListener { clickListener.onItemClick(card) }
+        holder.binding.root.setOnClickListener { clickListener(card) }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Card>(){
@@ -42,9 +42,5 @@ class CardsAdapter(
         override fun areContentsTheSame(oldItem: Card, newItem: Card) = oldItem == newItem
 
     }
-}
-
-interface RecyclerOnItemClickListener {
-    fun onItemClick(card: Card)
 }
 
