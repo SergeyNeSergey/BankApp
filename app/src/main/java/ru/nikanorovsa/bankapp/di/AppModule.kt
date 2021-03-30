@@ -63,7 +63,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson,okHttpClient: OkHttpClient, @ApplicationContext context: Context) = Retrofit.Builder()
+    fun provideRetrofit(gson: Gson,okHttpClient: OkHttpClient, @ApplicationContext context: Context): Retrofit = Retrofit.Builder()
         .baseUrl(context.getString(R.string.retrofit_url))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
