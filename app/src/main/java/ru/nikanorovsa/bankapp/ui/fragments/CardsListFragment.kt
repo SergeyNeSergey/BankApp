@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subscribers.DisposableSubscriber
-import kotlinx.android.synthetic.main.fragment_cards_list.*
 import ru.nikanorovsa.bankapp.R
 import ru.nikanorovsa.bankapp.data.Card
 import ru.nikanorovsa.bankapp.databinding.FragmentCardsListBinding
@@ -47,11 +46,15 @@ class CardsListFragment : Fragment(R.layout.fragment_cards_list) {
         }
         viewModel.status.observeOn(AndroidSchedulers.mainThread()).subscribe {
             if (it == Status.LOADING) {
-                cardsListFragmentRecycler.visibility = GONE
-                cardsListFragmentProgressBar.visibility = VISIBLE
+                binding.apply {
+                    cardsListFragmentRecycler.visibility = GONE
+                    cardsListFragmentProgressBar.visibility = VISIBLE
+                }
             } else {
-                cardsListFragmentProgressBar.visibility = GONE
-                cardsListFragmentRecycler.visibility = VISIBLE
+                binding.apply {
+                    cardsListFragmentProgressBar.visibility = GONE
+                    cardsListFragmentRecycler.visibility = VISIBLE
+                }
                 if (it == Status.ERROR) {
                     Toast.makeText(requireContext(), it.error.toString(), Toast.LENGTH_LONG).show()
                 }
@@ -62,12 +65,16 @@ class CardsListFragment : Fragment(R.layout.fragment_cards_list) {
                 if (t.isNullOrEmpty()) {
                     requireActivity().runOnUiThread {
                         Toast.makeText(requireContext(), "$t" + "object in database", Toast.LENGTH_LONG).show()
-                        viewModel.initRateList()
                     }
+                        viewModel.initRateList()
                 } else {
-                    cardsListFragmentProgressBar.visibility = GONE
-                    cardsListFragmentRecycler.visibility = VISIBLE
-                    cardsAdapter.submitList(t)
+                        requireActivity().runOnUiThread {
+                        binding.apply {
+                        cardsListFragmentProgressBar.visibility = GONE
+                        cardsListFragmentRecycler.visibility = VISIBLE
+                        }
+                        cardsAdapter.submitList(t)
+                    }
                 }
             }
             override fun onError(t: Throwable?) {
